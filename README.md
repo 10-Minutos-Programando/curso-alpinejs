@@ -2,12 +2,12 @@
 
 **Video URL:** 
 
-CLASE 1: https://youtu.be/__0xJ4OxELw
-CLASE 2: https://youtu.be/8_dhyX41aZo
-CLASE 3: https://youtu.be/l6QTsq5Pl-s
-CLASE 4: https://youtu.be/qy_GNHC3j3s
-CLASE 5: https://youtu.be/qy_GNHC3j3s
-CLASE 6: https://youtu.be/6FLPzE22umo
-CLASE 7: https://youtu.be/X-LyiWuV_gE
+- CLASE 1: https://youtu.be/__0xJ4OxELw
+- CLASE 2: https://youtu.be/8_dhyX41aZo
+- CLASE 3: https://youtu.be/l6QTsq5Pl-s
+- CLASE 4: https://youtu.be/qy_GNHC3j3s
+- CLASE 5: https://youtu.be/qy_GNHC3j3s
+- CLASE 6: https://youtu.be/6FLPzE22umo
+- CLASE 7: https://youtu.be/X-LyiWuV_gE
 
 **Description:** Comenzamos esta serie de vídeos para conocer cómo se usa el framework AlpineJS basado en la sintaxis de VueJS y Angular, pero sin tener tantas dependencias como los anteriores.
