@@ -1,0 +1,88 @@
+<!--
+1 - Instalar del CDN. Hay otras alternativas
+2 - x-data. Define el ámbito del componente que vas a crear
+Le dice al framework que se va a generar un nuevo ámbito con el objeto que le pasemos
+El objeto sólo estará disponible dentro del elemento donde se genera
+3 - Mediante la directiva x-text podemos asignar el texto de un elemento con cualquiera de los datos que tengamos dentro de nuestro ámbito
+4 - La directiva x-init nos permite lanzar cualquier tipo de expresión cuando se inicialice el componente. 
+5 - Ejemplo más complejo con x-data y x-init
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <style>
+        .producto {
+            width: 200px;
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        p {
+            width: 100%;
+            text-align: center;
+        }
+
+        .disponible {
+            background-color: green;
+
+        }
+
+        .no-disponible {
+            background-color: tomato;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        Con x-if se elimina el elemento completo del HTML 
+        Debe ir dentro de template
+        Dentro de la estructura del template únicamente debe haber un hijo
+    -->
+    <div x-data="main()">
+        <button @click="open = !open">Activa / Desactiva</button>
+        <template x-if="open">
+            <div>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quam, adipisci.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, odit!</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, odit!</p>
+            </div>
+        </template>
+
+        <div class="producto">
+            <h3 x-text="producto.nombre"></h3>
+            <p x-text="producto.precio"></p>
+            <template x-if="producto.activo">
+                <p class="disponible">Disponible</p>
+                <button>COMPRAR</button>
+            </template>
+            <template x-if="!producto.activo">
+                <p class="no-disponible">No Disponible</p>
+            </template>
+        </div>
+
+    </div>
+
+    <script>
+        function main() {
+            return {
+                open: true,
+                producto: {
+                    nombre: 'macbookpro 13',
+                    precio: 1499,
+                    activo: false
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

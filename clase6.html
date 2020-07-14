@@ -1,0 +1,79 @@
+<!--
+1 - Instalar del CDN. Hay otras alternativas
+2 - x-data. Define el ámbito del componente que vas a crear
+Le dice al framework que se va a generar un nuevo ámbito con el objeto que le pasemos
+El objeto sólo estará disponible dentro del elemento donde se genera
+3 - Mediante la directiva x-text podemos asignar el texto de un elemento con cualquiera de los datos que tengamos dentro de nuestro ámbito
+4 - La directiva x-init nos permite lanzar cualquier tipo de expresión cuando se inicialice el componente. 
+5 - Ejemplo más complejo con x-data y x-init
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <style>
+        .empleados-list {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .empleado {
+            width: 200px;
+            border: 1px solid black;
+            padding: 10px 30px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        Note: the :key binding is optional, but HIGHLY recommended.
+    -->
+    <div x-data="main()">
+        <template x-for="animal in animales" :key="animal">
+            <ul>
+                <li x-text="animal"></li>
+            </ul>
+        </template>
+    </div>
+
+    <div x-data="empleadosList()" class="empleados-list">
+        <template x-for="empleado in empleados" :key="empleado">
+            <div class="empleado">
+                <h3 x-text="empleado.nombre + ' ' + empleado.apellidos"></h3>
+                <p>Salario: <span x-text="empleado.salario + '€'"></span></p>
+                <p x-text="empleado.departamento"></p>
+            </div>
+        </template>
+    </div>
+
+    <script>
+        function main() {
+            return {
+                animales: ['perro', 'gato', 'pájaro', 'león']
+            }
+        }
+
+        function empleadosList() {
+            return {
+                empleados: [
+                    { nombre: 'Pepe', apellidos: 'García', departamento: 'Contabilidad', salario: 3000 },
+                    { nombre: 'María', apellidos: 'González', departamento: 'Soporte', salario: 2000 },
+                    { nombre: 'Rocío', apellidos: 'Prada', departamento: 'Soporte', salario: 1500 },
+                    { nombre: 'Ángel', apellidos: 'Romero', departamento: 'Desarrollo', salario: 1900 },
+                    { nombre: 'Dolores', apellidos: 'Camacho', departamento: 'Diseño', salario: 3200 },
+                ]
+            }
+        }
+    </script>
+</body>
+
+</html>

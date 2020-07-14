@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <style>
+        p {
+            display: flex;
+            padding: 40px;
+            width: 100px;
+            justify-content: center;
+            color: green;
+        }
+
+        .active {
+            border: 1px solid black;
+            background-color: indigo;
+        }
+
+        .inactive {
+            border: 0;
+            background-color: tomato;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div x-data="main()">
+        <div x-text="open"></div>
+        <button @click="open = !open">CAMBIA</button>
+        <p x-show="open">HOLA</p>
+        <p x-bind:class="{ 'active': open, 'inactive': !open }">OTRO</p>
+        <button x-bind:disabled="open">PULSA!</button>
+    </div>
+    <script>
+        function main() {
+            return {
+                open: false
+            }
+        }
+    </script>
+</body>
+
+</html>

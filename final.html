@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .characters-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .character {
+            width: 200px;
+            margin: 10px;
+            border: 1px solid gray;
+            position: relative;
+        }
+
+        .character h4 {
+            padding: 5px 10px;
+        }
+
+        .character img {
+            width: 100%;
+        }
+
+        .character .specie {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: lightblue;
+            color: white;
+            padding: 5px;
+        }
+
+        .character .origin {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div x-data="main()"
+        x-init="fetch(url).then(response => response.json()).then(json => {characters = json.results; numPages = Math.ceil(json.info.count/20);} )">
+        <button @click="changePage('prev')">PREV</button>
+        <button @click="changePage('next')">NEXT</button>
+        <div x-text="page"></div>
+        <div x-text="numPages"></div>
+        <div class="characters-list">
+            <template x-for="character in characters" :key="character">
+                <div class="character">
+                    <img x-bind:src="character.image" alt="">
+                    <h4 x-text="character.name"></h4>
+                    <p class="origin" x-text="character.origin.name"></p>
+                    <p class="specie" x-text="character.species"></p>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <script>
+        function main() {
+            return {
+                url: 'https://rickandmortyapi.com/api/character/',
+                characters: [],
+                page: 1,
+                numPages: 0,
+                changePage: async function (type) {
+                    if (type === 'next' && this.page < this.numPages) {
+                        this.page++;
+                    } else if (type === 'prev' && this.page > 1) {
+                        this.page--;
+                    }
+                    const response = await fetch(`${this.url}?page=${this.page}`);
+                    this.characters = (await response.json()).results;
+                }
+            }
+        }        
+    </script>
+</body>
+
+</html>

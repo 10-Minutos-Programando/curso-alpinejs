@@ -1,0 +1,72 @@
+<!--
+1 - Instalar del CDN. Hay otras alternativas
+2 - x-data. Define el ámbito del componente que vas a crear
+Le dice al framework que se va a generar un nuevo ámbito con el objeto que le pasemos
+El objeto sólo estará disponible dentro del elemento donde se genera
+3 - Mediante la directiva x-text podemos asignar el texto de un elemento con cualquiera de los datos que tengamos dentro de nuestro ámbito
+4 - La directiva x-init nos permite lanzar cualquier tipo de expresión cuando se inicialice el componente. 
+5 - Ejemplo más complejo con x-data y x-init
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <style>
+        button {
+            padding: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div x-data="main()">
+        <p x-text="texto"></p>
+        <input type="text" x-model="texto">
+        <!-- Espera un tiempo -->
+        <input type="text" x-model.debounce.750="texto">
+    </div>
+
+    <div x-data="formulario()">
+        <p x-text="persona.nombre"></p>
+        <p x-text="persona.apellidos"></p>
+        <p x-text="persona.edad"></p>
+        <p x-text="persona.direccion"></p>
+        <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" class="form-control" x-model="persona.nombre">
+        </div>
+        <div class="form-group">
+            <label>Apellidos</label>
+            <input type="text" class="form-control" x-model="persona.apellidos">
+        </div>
+        <div class="form-group">
+            <label>Edad</label>
+            <input type="text" class="form-control" x-model="persona.edad">
+        </div>
+        <div class="form-group">
+            <label>Dirección</label>
+            <input type="text" class="form-control" x-model="persona.direccion">
+        </div>
+    </div>
+
+    <script>
+        function main() {
+            return {
+                texto: ''
+            }
+        }
+
+        function formulario() {
+            return {
+                persona: {}
+            }
+        }
+    </script>
+</body>
+
+</html>

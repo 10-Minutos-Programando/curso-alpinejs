@@ -1,0 +1,42 @@
+<!--
+1 - Instalar del CDN. Hay otras alternativas
+2 - x-data. Define el ámbito del componente que vas a crear
+Le dice al framework que se va a generar un nuevo ámbito con el objeto que le pasemos
+El objeto sólo estará disponible dentro del elemento donde se genera
+3 - Mediante la directiva x-text podemos asignar el texto de un elemento con cualquiera de los datos que tengamos dentro de nuestro ámbito
+4 - La directiva x-init nos permite lanzar cualquier tipo de expresión cuando se inicialice el componente. 
+5 - Ejemplo más complejo con x-data y x-init
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+</head>
+
+<body>
+    <div x-data="{nombre: 'Mario', email: 'mario@email.com'}" x-init="nombre = 'Mario Girón'">
+        <p x-text="nombre"></p>
+    </div>
+
+    <div x-data="mainComp()" x-init="start()">
+        <p x-text="usuario"></p>
+    </div>
+    <script>
+        function mainComp() {
+            return {
+                usuario: null,
+                start: function () {
+                    console.log('Arranca la mandanga');
+                    this.usuario = 'Benito'
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
